@@ -1,0 +1,29 @@
+Source: vyatta-hwdiag
+Section: contrib/net
+Priority: optional
+Maintainer: Vyatta Package Maintainers <DL-vyatta-help@att.com>
+Build-Depends: debhelper (>= 9),
+	       dh-yang,
+Standards-Version: 3.9.8
+
+Package: vyatta-hwdiag
+Architecture: all
+Depends: python3,
+         python3-yaml,
+         ${misc:Depends}
+Description: Vyatta Hardware Diagnostics integration
+ Provides scripts and files necessary to run hardware diagnostics
+ with the Vyatta configuration system.
+
+Package: vyatta-op-request-hardware-diagnostic-v1-yang
+Architecture: all
+Depends: vyatta-hwdiag, ${misc:Depends}, ${yang:Depends}
+Description: vyatta-op-request-hardware-diagnostic-v1 module
+ Vyatta hardware diagnostics YANG
+
+Package: vyatta-demo-hardware-diagnostics
+Architecture: all
+Depends: ${misc:Depends}
+Description: Provides a imple hardware diagnotics module
+ A demo hardware diagnotics module for testing
+

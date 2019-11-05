@@ -1,0 +1,77 @@
+# Demo Hardware Diagnostics
+#
+# name:
+# probe:
+# diagnostics:
+#       test1:
+#               completions:
+#               prerun:
+#               run:
+#               postrun:
+#       test1:
+#               ...
+#
+---
+name: Demo Hardware Diagnostics
+probe: /bin/true
+diagnostics:
+        version:
+                completions:
+                run: |
+                        echo 0.0.0
+
+        i2ctest:
+                completions:
+                        i2ctest: ioexp mux eeprom general
+                        i2ctest ioexp: mainboard cpu
+                        i2ctest mux: mainboard cpu
+                        i2ctest eeprom: mainboard cpu qsfp sfp+
+                        i2ctest general: mainboard
+                run: |
+                        echo i2ctest %args%
+
+        eeprom:
+                completions:
+                        eeprom: dump module
+                        eeprom dump: main cpu
+                        eeprom dump main: info
+                        eeprom dump cpu: info
+                        eeprom module: 1 2
+                run: |
+                        echo eeprom %args%
+
+        tempread:
+                completions:
+                        tempread: all
+                run: |
+                        echo tempread %args%
+
+        voltageread:
+                completions:
+                        voltageread: all
+                run: |
+                        echo voltageread %args%
+
+        fanmodeselect:
+                completions:
+                        fanmodeselect: thermal manual
+                run: |
+                        echo fanmodeselect %args%
+
+        fanwrite:
+                completions:
+                        fanwrite: 10 20 30 40 50 60 70 80 90 100
+                run: |
+                        echo fanwrite %args%
+
+        fanread:
+                completions:
+                        fanread: 1 2 3 4 5
+                run: |
+                        echo fanread %args%
+
+        psuread:
+                completions:
+                        psuread: 1 2
+                run: |
+                        echo fanread %args%
